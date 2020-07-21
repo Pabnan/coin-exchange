@@ -1,7 +1,13 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import './coin.css';
+import styled from 'styled-components'
 
+const Td= styled.td`
+background-color: #1dc254;
+   border: 1px solid;
+   width: 25vh;
+   color:white;
+`;
 export default class Coin extends Component {
 
   constructor (props) {
@@ -11,27 +17,6 @@ export default class Coin extends Component {
     }
     this.handleClick = this.handleClick.bind(this); // binding this
   }
-
-  // componentDidMount () {
-  //   const callback = () =>{
-  //     //set the state to a new random value
-  //     const randomPercentage = 0.995 + Math.random()*0.01;
-
-  //     this.setState(function(oldState){
-  //       return{
-  //         price: oldState.price*randomPercentage
-
-  //       };
-
-  //     });
-  //   }
-      
-  //   setInterval(callback, 1000);
-  // }
-
-
-
-
   handleClick(event){
     event.preventDefault();
 
@@ -39,26 +24,22 @@ export default class Coin extends Component {
       this.setState(function(oldState){
          return{
           price: oldState.price*randomPercentage
-
         };
-
        });
   }
     render() {
-        return(
-                 
-          <tr className="coin-row"> 
-            <td>{this.props.name}   </td> 
-            <td>{this.props.ticker} </td>
-            <td>${this.state.price} </td>
-            <td>
-              <form action='' method= 'POST'>
+        return(        
+          <tr> 
+            <Td>{this.props.name}   </Td> 
+            <Td>{this.props.ticker} </Td>
+            <Td>${this.state.price} </Td>
+            <Td>
+              <form action='#' method= 'POST'>
               <button onClick= {this.handleClick}>refresh</button>
               </form> 
-            </td>
+            </Td>
           </tr>
         ) ;   
-       
     }
 }
 Coin.propTypes = {
