@@ -9,26 +9,21 @@ background-color: #1dc254;
    color:white;
 `;
 export default class Coin extends Component {
-
-  constructor (props) {
-    super(props);
-
-    this.handleClick=this.handleClick.bind(this);
+  handleClick=(event)=>{
+    event.preventDefault();
+    this.props.handleRefresh(this.props.tickerId);
     
   }
-  handleClick(event){
-    event.preventDefault();
-    this.props.handleRefresh(this.props.ticker);
-  }
     render() {
+      const balanceDisplay= this.props.showBalance ? <Td>{this.props.balance}</Td>:null;
+      
         return(        
-          <tr> 
-            <Td>{this.props.name}   </Td> 
-            <Td>{this.props.ticker} </Td>
-            <Td>${this.props.price} </Td>
-        
+           <tr> 
+            <Td> {this.props.name}   </Td> 
+            <Td> {this.props.ticker} </Td>
+                 {balanceDisplay}    
+            <Td>${this.props.price}  </Td>
             <Td>
-            
                <form action='#' method= 'POST'>
               <button onClick= {this.handleClick}>refresh</button>
               </form>  
@@ -40,5 +35,6 @@ export default class Coin extends Component {
 Coin.propTypes = {
     name: PropTypes.string.isRequired,
     ticker: PropTypes.string.isRequired,
+    
     price: PropTypes.number.isRequired
   };
